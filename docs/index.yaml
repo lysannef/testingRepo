@@ -2,12 +2,12 @@ apiVersion: v1
 entries:
   ibm-kibana:
   - appVersion: 6.3.1
-    created: 2018-11-28T20:40:53.680326023-08:00
+    created: 2018-11-28T21:06:56.2418567-08:00
     description: Kibana is an open source data visualization plugin for Elasticsearch
-    digest: bc09078e4d98ee32cb7387035ab86720fc8f2eb4c7ed56b3594b1404d52d9d92
+    digest: f7aecdd49cdb014c5c9623f6395b8e8ddddf81accecf4fe5a9951e8c25518a89
     engine: gotpl
     home: https://www.elastic.co/products/kibana
-    icon: https://raw.githubusercontent.com/ppc64le/charts/master/logo/kibana.png
+    icon: https://raw.githubusercontent.com/elastic/kibana/master/src/ui/public/icons/kibana-color.svg
     keywords:
     - elasticsearch
     - kibana
@@ -25,4 +25,4 @@ entries:
     urls:
     - https://lysannef.github.io/testingRepo/ibm-kibana-0.10.0.tgz
     version: 0.10.0
-generated: 2018-11-28T20:40:53.679030603-08:00
+generated: 2018-11-28T21:06:56.239766995-08:00
