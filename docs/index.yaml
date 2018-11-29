@@ -1,0 +1,28 @@
+apiVersion: v1
+entries:
+  ibm-kibana:
+  - appVersion: 6.3.1
+    created: 2018-11-28T20:35:50.831703653-08:00
+    description: Kibana is an open source data visualization plugin for Elasticsearch
+    digest: bc09078e4d98ee32cb7387035ab86720fc8f2eb4c7ed56b3594b1404d52d9d92
+    engine: gotpl
+    home: https://www.elastic.co/products/kibana
+    icon: https://raw.githubusercontent.com/ppc64le/charts/master/logo/kibana.png
+    keywords:
+    - elasticsearch
+    - kibana
+    - Limited
+    - ppc64le
+    - Tools
+    - ICP
+    maintainers:
+    - email: smohite@us.ibm.com
+      name: IBM ISV Team
+    name: ibm-kibana
+    sources:
+    - https://github.com/elastic/kibana
+    tillerVersion: '>=2.7.2'
+    urls:
+    - ibm-kibana-0.10.0.tgz
+    version: 0.10.0
+generated: 2018-11-28T20:35:50.830223222-08:00
