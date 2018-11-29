@@ -11,8 +11,11 @@ spec:
   replicas: {{ .Values.replicaCount }}
   template:
     metadata:
-    {{- if .Values.podAnnotations }}
       annotations:
+        productName: kibana
+        productID: kibana_{{ .Chart.Version }}
+        productVersion: {{ .Chart.Version }}
+      {{- if .Values.podAnnotations }}
 {{ toYaml .Values.podAnnotations | indent 8 }}
     {{- end }}
       labels:
@@ -82,13 +85,5 @@ spec:
             name: {{ template "kibana.fullname" . }}
 {{- if .Values.node }}
       affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: beta.kubernetes.io/arch
-                operator: In
-                values:
-                - {{ .Values.node }}
+        {{- include "nodeaffinity" . | indent 6 }}
 {{- end }}
-
