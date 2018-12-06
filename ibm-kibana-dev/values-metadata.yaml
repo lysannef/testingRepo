@@ -44,34 +44,34 @@ image:
       type: "string"
       required: false
 
-#env:
-# __metadata:
-#   label: "Environment"
-#   description: "Environment Details"
-# elasticsearchUrl:
-#   __metadata:
-#     label: "Elasticsearch URL"
-#     description: "Specify the Elasticsearch URL to be hit"
-#     type: "string"
-#     required: false
-# loggingVerbose:
-#   __metadata:
-#     label: "Logging"
-#     description: " Enable or Disable Logging"
-#     type: "boolean"
-#     required: false
-# serverDefaultRoute:
-#   __metadata:
-#     label: "Default Route"
-#     description: " Server Default Route"
-#     type: "string"
-#     required: false
-# serverPort:
-#   __metadata:
-#     label: "Server Port"
-#     description: " Server Port Number"
-#     type: "number"
-#     required: false 
+env:
+  __metadata:
+    label: "Environment"
+    description: "Environment Details"
+  elasticsearchUrl:
+    __metadata:
+      label: "Elasticsearch URL"
+      description: "Specify the Elasticsearch URL to be hit"
+      type: "string"
+      required: false
+  loggingVerbose:
+    __metadata:
+      label: "Logging"
+      description: " Enable or Disable Logging"
+      type: "boolean"
+      required: false
+  serverDefaultRoute:
+    __metadata:
+      label: "Default Route"
+      description: " Server Default Route"
+      type: "string"
+      required: true
+  serverPort:
+    __metadata:
+      label: "Server Port"
+      description: " Server Port Number"
+      type: "number"
+      required: false 
 ingress:
   __metadata:
     label: "Ingress settings"
@@ -83,14 +83,21 @@ ingress:
       description: "Specifies whether to use Ingress."
       type: "boolean"
       immutable: false
+      required: true
+  hosts:
+    __metadata:
+      label: "Virtual hosts"
+      description: "Name-based virtual hosts"
+      type: "string"
       required: false
   tls:
-    hosts:
-      __metadata:
-        label: "Virtual hosts"
-        description: "Name-based virtual hosts"
-        type: "string"
-        required: false
+    __metadata:
+      name: "tls"
+      label: "TLS"
+      description: "TLS consisting of secret name and hosts"
+      type: "string"
+      immutable: false
+      required: true
   annotations:
     __metadata:
       label: "Servicegraph Ingress Annotation"
@@ -120,7 +127,7 @@ service:
       description: "Type of service"
       type: "string"
       immutable: false
-      required: false
+      required: true
       options:
         - label: "Cluster IP"
           value: "ClusterIP"
@@ -133,7 +140,7 @@ service:
       description: "This is the internal port number"
       type: "number"
       immutable: false
-      required: false
+      required: true
   externalPort:
     __metadata:
       name: "externalPort"
@@ -141,7 +148,7 @@ service:
       description: "This is the external port number"
       type: "number"
       immutable: false
-      required: false
+      required: true
   annotations:
     __metadata:
       label: "Ingress Service Annotations"
@@ -171,7 +178,7 @@ service:
       description: "Exposes the service on Node’s IP at a static port"
       type: "number"
       immutable: false
-      required: false
+      required: true
   labels:
     __metadata:
       label: "Service Labels"
@@ -207,14 +214,14 @@ files:
             description: "Elasticsearch URL"
             type: "string"
             immutable: false
-            required: false
+            required: true
       server:
         host:
           __metadata:
             label: "Host Server"
             description: "IP address of the host server"
             immutable: false
-            required: false
+            required: true
         name:
           __metadata:
             label: "Server Name"
@@ -253,4 +260,61 @@ commandline:
       label: "Command Line Args"
       description: "Specify command line arguments"
       type: "string"
+      required: false
+
+livenessProbe:
+  __metadata:
+    label: " Liveness Probe"
+    description: " Liveness Probe details"
+  enabled:
+    __metadata:
+      label: "Enabled"
+      description: "Livness enabled/disabled"
+      type: "boolean"
+      required: false
+  initialDelaySeconds:
+    __metadata:
+      label: "Initial Delay"
+      description: " Initial Delay for Liveness Probe in seconds"
+      type: "number"
+      required: false
+  timeoutSeconds:
+    __metadata:
+      label: "Time Out"
+      description: "Time out in seconds for Liveness Probe"
+      required: false
+
+
+readinessProbe:
+  __metadata:
+    label: " Readiness Probe"
+    description: "Readiness Probe details"
+  enabled:
+    __metadata:
+      label: "Enabled"
+      description: "Readiness enabled/disabled"
+      type: "boolean"
+      required: false
+  initialDelaySeconds:
+    __metadata:
+      label: "Initial Delay"
+      description: " Initial Delay for Readiness Probe in seconds"
+      type: "number"
+      required: false
+  timeoutSeconds:
+    __metadata:
+      label: "Time Out"
+      description: "Time out in seconds for Readiness Probe"
+      required: false
+  periodSeconds:
+    __metadata:
+      label: "Period Seconds"
+      description: " Time Period to check for Readiness in seconds"
+      type: "number"
+      required: false
+  successThreshold:
+    __metadata:
+      label: "Success Threshold" 
+      description: " Seconds to measure success of Threshold"
+      type: "number"
       required: false

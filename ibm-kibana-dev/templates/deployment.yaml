@@ -17,7 +17,7 @@ spec:
         productVersion: {{ .Chart.Version }}
       {{- if .Values.podAnnotations }}
 {{ toYaml .Values.podAnnotations | indent 8 }}
-    {{- end }}
+      {{- end }}
       labels:
         app: {{ template "kibana.name" . }}
         release: "{{ .Release.Name }}"
@@ -30,10 +30,22 @@ spec:
       {{- if .Values.priorityClassName }}
       priorityClassName: "{{ .Values.priorityClassName }}"
       {{- end }}
+      hostNetwork: false
+      hostPID: false
+      hostIPC: false
+      securityContext:
+        runAsNonRoot: false
+        runAsUser:
       containers:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        securityContext:
+          privileged: false
+          readOnlyRootFilesystem: false
+          allowPrivilegeEscalation: false
+          runAsNonRoot: false
+          runAsUser: 
         {{- if .Values.commandline.args }}
         args:
           - "/bin/bash"
@@ -49,14 +61,24 @@ spec:
         - containerPort: {{ .Values.service.internalPort }}
           name: {{ template "kibana.name" . }}
           protocol: TCP
-        # livenessProbe:
-        #   httpGet:
-        #     path: /ping
-        #     port: {{ .Values.service.internalPort }}
-        # readinessProbe:
-        #   httpGet:
-        #     path: /ping
-        #     port: {{ .Values.service.internalPort }}
+{{- if .Values.livenessProbe.enabled }}
+        livenessProbe:
+          httpGet:
+            path: /status
+            port: {{ .Values.service.internalPort }}
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+{{- end }}
+{{- if .Values.readinessProbe.enabled }}
+        readinessProbe:
+          httpGet:
+            path: /status
+            port: {{ .Values.service.internalPort }}
+          initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+          timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+          successThreshold: {{ .Values.readinessProbe.successThreshold }}
+          periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+{{- end }}
         resources:
 {{ toYaml .Values.resources | indent 10 }}
         volumeMounts:
@@ -87,3 +109,4 @@ spec:
       affinity:
         {{- include "nodeaffinity" . | indent 6 }}
 {{- end }}
+

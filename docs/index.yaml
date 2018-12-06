@@ -506,12 +506,12 @@ entries:
     version: 0.10.0
   ibm-kibana-dev:
   - appVersion: 6.3.1
-    created: 2018-11-30T03:54:08.292221696-08:00
+    created: 2018-12-06T01:25:41.291787615-08:00
     description: Kibana is an open source data visualization plugin for Elasticsearch
-    digest: 3c22f642088279757c833169ae598abd99456086b485f6f0a94df21e69e8f4e4
+    digest: 0735bd08319e3294a8367ebb108170ab40ee00ea7fc62caa2958a1084df53e5d
     engine: gotpl
     home: https://www.elastic.co/products/kibana
-    icon: https://raw.githubusercontent.com/elastic/kibana/master/src/ui/public/icons/kibana-color.svg
+    icon: https://raw.githubusercontent.com/ppc64le/charts/master/logo/kibana.png
     keywords:
     - elasticsearch
     - kibana
@@ -1194,6 +1194,34 @@ entries:
     urls:
     - https://lysannef.github.io/testingRepo/ibm-tensorflow-notebook-0.1.1.tgz
     version: 0.1.1
+  ibm-tensorflow-notebook-dev:
+  - apiVersion: v1
+    appVersion: 1.6.0
+    created: 2018-12-06T01:25:41.292732833-08:00
+    description: A Helm chart for tensorflow notebook and tensorboard
+    digest: 7d351cc6af84ceb56696fc99ae9fbd69e5c404a2aa93c721a74b09474ff77528
+    home: https://www.tensorflow.org
+    icon: https://raw.githubusercontent.com/ppc64le/charts/master/logo/tensorflow-notebook.png
+    keywords:
+    - tenserflow
+    - adapter
+    - Limited
+    - ppc64le
+    - Tools
+    - ICP
+    - Beta
+    kubeVersion: '>=1.7.0'
+    maintainers:
+    - email: smohite@us.ibm.com
+      name: IBM ISV Team
+    name: ibm-tensorflow-notebook-dev
+    sources:
+    - https://github.com/tensorflow/tensorflow
+    - https://github.com/jupyter
+    tillerVersion: '>=2.7.2'
+    urls:
+    - https://lysannef.github.io/testingRepo/ibm-tensorflow-notebook-dev-0.1.1.tgz
+    version: 0.1.1
   ibm-tidb:
   - apiVersion: v1
     appVersion: "1.0"
@@ -1282,4 +1310,4 @@ entries:
     urls:
     - https://lysannef.github.io/testingRepo/ibm-tomee-0.1.0.tgz
     version: 0.1.0
-generated: 2018-11-30T03:54:08.26185083-08:00
+generated: 2018-12-06T01:25:41.290464418-08:00

@@ -34,7 +34,7 @@ spec:
   {{- end }}
 {{- end }}
   ports:
-    - name: prometheusPushgateway
+    - name: prometheus-push-gateway
       port: {{ .Values.pushgateway.service.servicePort }}
       protocol: TCP
       targetPort: 9091

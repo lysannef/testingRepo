@@ -5,9 +5,9 @@
 
 ## Fixes
 
-## Breaking Changes
-
 ## Documentation
+
+## Breaking Changes
 
 ## Prerequisites
 
