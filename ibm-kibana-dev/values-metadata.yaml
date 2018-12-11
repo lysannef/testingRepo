@@ -178,7 +178,7 @@ service:
       description: "Exposes the service on Node’s IP at a static port"
       type: "number"
       immutable: false
-      required: true
+      required: false
   labels:
     __metadata:
       label: "Service Labels"
@@ -219,7 +219,7 @@ files:
             label: "Host Server"
             description: "IP address of the host server"
             immutable: false
-            required: true
+            required: false
         name:
           __metadata:
             label: "Server Name"
