@@ -22,7 +22,8 @@ files:
     ## Default Kibana configuration from kibana-docker.
     server.name: kibana
     server.host: "0"
-    elasticsearch.url: http://elasticsearch:9200
+## Please specify the IP or the path to where you have the elasticsearch service running 
+    elasticsearch.url: http://elasticsearch-client:9200
 
     ## Custom config properties below
     ## Ref: https://www.elastic.co/guide/en/kibana/current/settings.html
@@ -68,12 +69,10 @@ ingress:
 
 # Liveness and Readiness Probes
 livenessProbe:
-  enabled: false
   initialDelaySeconds: 30
   timeoutSeconds: 10
 
 readinessProbe:
-  enabled: false
   initialDelaySeconds: 30
   timeoutSeconds: 10
   periodSeconds: 10

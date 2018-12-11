@@ -40,12 +40,25 @@ spec:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        livenessProbe:
+          httpGet:
+            path: /status
+            port: {{ .Values.service.internalPort }}
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+        readinessProbe:
+          httpGet:
+            path: /status
+            port: {{ .Values.service.internalPort }}
+          initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+          timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+          successThreshold: {{ .Values.readinessProbe.successThreshold }}
+          periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
         securityContext:
           privileged: false
           readOnlyRootFilesystem: false
           allowPrivilegeEscalation: false
-          runAsNonRoot: false
-          runAsUser: 
+          runAsNonRoot: false 
         {{- if .Values.commandline.args }}
         args:
           - "/bin/bash"
@@ -61,24 +74,6 @@ spec:
         - containerPort: {{ .Values.service.internalPort }}
           name: {{ template "kibana.name" . }}
           protocol: TCP
-{{- if .Values.livenessProbe.enabled }}
-        livenessProbe:
-          httpGet:
-            path: /status
-            port: {{ .Values.service.internalPort }}
-          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
-          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
-{{- end }}
-{{- if .Values.readinessProbe.enabled }}
-        readinessProbe:
-          httpGet:
-            path: /status
-            port: {{ .Values.service.internalPort }}
-          initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
-          timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
-          successThreshold: {{ .Values.readinessProbe.successThreshold }}
-          periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
-{{- end }}
         resources:
 {{ toYaml .Values.resources | indent 10 }}
         volumeMounts:

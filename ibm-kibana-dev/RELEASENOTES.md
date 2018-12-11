@@ -2,16 +2,14 @@
 
 ## What's new in Chart Version 0.10.0
 
-
 ## Fixes
 
 ## Documentation
 
 ## Breaking Changes
+- No changes
 
 ## Prerequisites
-
-- No changes
 
 ## Version History
 
