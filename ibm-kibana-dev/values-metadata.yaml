@@ -33,6 +33,7 @@ image:
         value: "Never"
       - label: "IfNotPresent"
         value: "IfNotPresent"
+
 ## Optionally specify an array of imagePullSecrets.
 ## Secrets must be manually created in the namespace.
 ## ref: https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod
@@ -209,7 +210,7 @@ files:
         url:
           __metadata:
             label: "url"
-            description: "Elasticsearch URL"
+            description: "Elasticsearch URL.Please specify the IP or the path to where you have the elasticsearch service running"
             type: "string"
             immutable: false
             required: true
@@ -219,7 +220,7 @@ files:
             label: "Host Server"
             description: "IP address of the host server"
             immutable: false
-            required: false
+            required: true
         name:
           __metadata:
             label: "Server Name"

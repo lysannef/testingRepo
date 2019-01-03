@@ -1,4 +1,4 @@
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -21,7 +21,7 @@ spec:
       labels:
         app: {{ template "kibana.name" . }}
         release: "{{ .Release.Name }}"
-        chart: "{{ .Chart.Name }}"
+        chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
         heritage: {{ .Release.Service }}
     spec:
       {{- if .Values.serviceAccountName }}
@@ -33,13 +33,19 @@ spec:
       hostNetwork: false
       hostPID: false
       hostIPC: false
-      securityContext:
-        runAsNonRoot: false
-        runAsUser:
       containers:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        securityContext:
+            privileged: false
+            readOnlyRootFilesystem: false
+            allowPrivilegeEscalation: true
+            runAsNonRoot: false
+            runAsUser: 0
+            capabilities:
+             drop:
+             - MKNOD
         livenessProbe:
           httpGet:
             path: /status
@@ -54,11 +60,6 @@ spec:
           timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
           successThreshold: {{ .Values.readinessProbe.successThreshold }}
           periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
-        securityContext:
-          privileged: false
-          readOnlyRootFilesystem: false
-          allowPrivilegeEscalation: false
-          runAsNonRoot: false 
         {{- if .Values.commandline.args }}
         args:
           - "/bin/bash"
