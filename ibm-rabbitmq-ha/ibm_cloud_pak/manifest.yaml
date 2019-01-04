@@ -1,0 +1,9 @@
+charts:
+  - archive: file:ibm-rabbitmq-ha-1.6.3.tgz
+    repository-keys: 
+      - image.repository
+
+images:
+- image: rabbitmq
+  references:
+  - repository: rabbitmq

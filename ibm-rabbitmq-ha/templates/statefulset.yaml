@@ -1,4 +1,4 @@
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: {{ template "rabbitmq-ha.fullname" . }}
@@ -11,6 +11,11 @@ metadata:
 {{ toYaml .Values.extraLabels | indent 4 }}
 {{- end }}
 spec:
+  selector:
+    matchLabels:
+      app: {{ template "rabbitmq-ha.name" . }}
+      release: {{ .Release.Name }}
+      heritage: {{ .Release.Service }}
   serviceName: {{ template "rabbitmq-ha.fullname" . }}-discovery
   replicas: {{ .Values.replicaCount }}
   updateStrategy:
@@ -33,7 +38,13 @@ spec:
         prometheus.io/scrape: "true"
         prometheus.io/port: {{ .Values.prometheus.exporter.port | quote }}
 {{- end }}
+        productName: rabbitmq-ha
+        productID: rabbitmq-ha_{{ .Chart.Version }}
+        productVersion: {{ .Chart.Version }}
     spec:
+      hostNetwork: false
+      hostPID: false
+      hostIPC: false
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
       serviceAccountName: {{ template "rabbitmq-ha.serviceAccountName" . }}
       initContainers:
@@ -51,6 +62,15 @@ spec:
         - name: {{ .Chart.Name }}
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          securityContext:
+            privileged: false
+            readOnlyRootFilesystem: false
+            allowPrivilegeEscalation: true
+            runAsNonRoot: false
+            runAsUser: 0
+            capabilities:
+             drop:
+             - MKNOD
           ports:
             - name: epmd
               protocol: TCP

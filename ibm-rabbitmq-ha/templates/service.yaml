@@ -28,15 +28,15 @@ spec:
 {{ toYaml .Values.service.loadBalancerSourceRanges | indent 4 }}
 {{- end }}
   ports:
-    - name: http
+    - name: http1
       protocol: TCP
       port: {{ .Values.rabbitmqManagerPort }}
       targetPort: http
-    - name: amqp
+    - name: amqp1
       protocol: TCP
       port: {{ .Values.rabbitmqNodePort }}
       targetPort: amqp
-    - name: epmd
+    - name: epmd1
       protocol: TCP
       port: {{ .Values.rabbitmqEpmdPort }}
       targetPort: epmd

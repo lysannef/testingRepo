@@ -14,6 +14,9 @@ This chart bootstraps a [RabbitMQ](https://hub.docker.com/r/_/rabbitmq)
 deployment on a [Kubernetes](http://kubernetes.io) cluster using the
 [Helm](https://helm.sh) package manager.
 
+## PodSecurityPolicy Requirements
+This chart requires a PodSecurityPolicy to be bound to the target namespace prior to installation. Choose predefined ibm-anyuid-psp PodSecurityPolicy.
+
 ## Prerequisites
 
 - Kubernetes 1.7+ 
@@ -207,3 +210,5 @@ Similar to custom ConfigMap, `existingSecret` can be used to override the defaul
 Prometheus and its features can be enabled by setting `prometheus.enabled` to `true`.  See values.yaml for more details and configuration options
 
 ## Limitations
+
+##NOTE This chart has been validated on ppc64le.

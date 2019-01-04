@@ -1,7 +1,7 @@
 apiVersion: v1
 appVersion: 3.7.4
-description: Highly available RabbitMQ cluster, the open source message broker software
-  that implements the Advanced Message Queuing Protocol (AMQP).
+kubeVersion: ">=1.10.0"
+description: Highly available RabbitMQ cluster, the open source message broker software.
 home: https://www.rabbitmq.com
 icon: https://raw.githubusercontent.com/ppc64le/charts/master/logo/rabbitmq.png
 keywords:
