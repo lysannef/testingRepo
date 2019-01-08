@@ -138,7 +138,7 @@ controller:
       description: "extra Containers information"
       type: "string"
       immutable: false
-      required: true
+      required: false
   extraEnvs:
     __metadata:
       name: "extraEnvs"
