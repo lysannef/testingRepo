@@ -72,7 +72,7 @@ controller:
         description: "config Map Key details"
         type: "string"
         immutable: false
-        required: true
+        required: false
     configMapName:
       __metadata:
         name: "configMapName"
@@ -80,7 +80,7 @@ controller:
         description: "config Map Key Name"
         type: "string"
         immutable: false
-        required: true
+        required: false
   daemonset:
     hostPorts:
       http:
@@ -114,7 +114,7 @@ controller:
         description: "default Backend Service"
         type: "string"
         immutable: false
-        required: true
+        required: false
   dnsPolicy:
     __metadata:
       name: "dnsPolicy"
@@ -146,7 +146,7 @@ controller:
       description: "extra Envs"
       type: "string"
       immutable: false
-      required: true
+      required: false
   extraInitContainers:
     __metadata:
       name: "extraInitContainers"
@@ -154,7 +154,7 @@ controller:
       description: "extra init Containers information"
       type: "string"
       immutable: false
-      required: true
+      required: false
   extraVolumeMounts:
     __metadata:
       name: "extraVolumeMounts"
@@ -162,7 +162,7 @@ controller:
       description: "extra Volume Mounts"
       type: "string"
       immutable: false
-      required: true
+      required: false
   extraVolumes:
     __metadata:
       name: "extraVolumes"
@@ -170,7 +170,7 @@ controller:
       description: "extra Volumes"
       type: "string"
       immutable: false
-      required: true
+      required: false
   hostNetwork:
     __metadata:
       name: "hostNetwork"
