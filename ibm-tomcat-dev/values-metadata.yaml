@@ -1,21 +1,7 @@
-node:
-   __metadata:
-     name: "Node Selector"
-     label: "nodeSelector"
-     description: "Node Prefernce"
-     type: "string"
-     immutable: false
-     required: true
-     options:
-     - label: "ppc64le"
-       value: "ppc64le"
-     - label: "amd64"
-       value: "amd64"
-
 image:
   __metadata:
     label: "Image"
-    description: "Docker Image Details"
+    description: "Docker image details"
   repository:
     __metadata:
       name: "repository"
@@ -33,18 +19,20 @@ image:
       immutable: false
       required: true
   pullPolicy:
-     __metadata:
-       name: "pullPolicy"
-       label: "Docker image pull policy"
-       description: "Defaults to 'Always' when the latest tag is specified. Otherwise the default is 'IfNotPresent'."
-       type: "string"
-       immutable: true
-       required: true
-       options:
-       - label: "Always"
-         value: "Always"
-       - label: "Never"
-         value: "Never"
+    __metadata:
+      name: "pullPolicy"
+      label: "Docker image pull policy"
+      description: "Defaults to 'Always' when the latest tag is specified. Otherwise the default is 'IfNotPresent'."
+      type: "string"
+      immutable: false
+      required: true
+      options:
+      - label: "Always"
+        value: "Always"
+      - label: "Never"
+        value: "Never"
+      - label: "IfNotPresent"
+        value: "IfNotPresent"
 
 ingress:
   __metadata:
@@ -57,7 +45,7 @@ ingress:
       description: "Specifies whether to use Ingress."
       type: "boolean"
       immutable: false
-      required: true
+      required: false
   path:
     __metadata:
       name: "path"
@@ -65,7 +53,7 @@ ingress:
       description: "Path must match the content of an incoming request before the loadbalancer directs traffic to the backend."
       type: "string"
       immutable: false
-      required: true
+      required: false
   hosts:
     __metadata:
       label: "Virtual hosts"
@@ -81,6 +69,7 @@ ingress:
       immutable: false
       required: false
 
+
 replicaCount:
    __metadata:
      name: "replicaCount"
@@ -88,30 +77,26 @@ replicaCount:
      description: "Number of replicas of deployment needed to be created"
      type: "string"
      immutable: false
-     required: true
+     required: false
 
 
 service:
   __metadata:
-    label: "service"
+    label: "Service"
     description: "Application Service Details"
   type:
     __metadata:
       name: "type"
       label: "Service Type"
-      description: "Type of Service- NodePort, ClusterIP"
+      description: "Type of service"
       type: "string"
       immutable: false
-      required: true
+      required: false
       options:
-      - label: "ClusterIP"
-        value: "ClusterIP"
-      - label: "NodePort"
-        value: "NodePort"
-      - label: "LoadBalancer"
-        value: "LoadBalancer"
-      - label: "IfNotPresent"
-        value: "IfNotPresent"
+        - label: "Cluster IP"
+          value: "ClusterIP"
+        - label: "Node Port"
+          value: "NodePort"
   port:
     __metadata:
       name: "port"
@@ -119,7 +104,36 @@ service:
       description: "The HTTP port that the container will expose."
       type: "number"
       immutable: false
-      required: true
+      required: false
+  internalPort:
+    __metadata:
+      name: "internalPort"
+      label: "Internal HTTP Port"
+      description: "This is the internal port number"
+      type: "number"
+      immutable: false
+      required: false
+  externalPort:
+    __metadata:
+      name: "externalPort"
+      label: "External HTTP Port"
+      description: "This is the external port number"
+      type: "number"
+      immutable: false
+      required: false
+
+
+node: 
+   __metadata:
+     name: "Node"
+     label: "Node Preference "
+     description: "Select node architecture to deploy chart on"
+     type: "string"
+     immutable: false
+     required: true
+     options:
+     - label: "ppc64le"
+       value: "ppc64le"
 
 tolerations:
   __metadata:
