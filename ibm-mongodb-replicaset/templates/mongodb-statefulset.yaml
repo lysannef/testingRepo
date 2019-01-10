@@ -1,4 +1,4 @@
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   labels:
@@ -28,6 +28,9 @@ spec:
 {{ toYaml .Values.extraLabels | indent 8 }}
 {{- end }}
       annotations:
+        productName: mongodb_replicaset
+        productID: mongodb_replicaset_{{ .Chart.Version }}
+        productVersion: {{ .Chart.Version }}
       {{- if .Values.metrics.prometheusServiceDiscovery }}
         prometheus.io/scrape: "true"
         prometheus.io/port: {{ .Values.metrics.port | quote }}
@@ -37,6 +40,9 @@ spec:
 {{ toYaml .Values.podAnnotations | indent 8 }}
       {{- end }}
     spec:
+      hostNetwork: false
+      hostPID: false
+      hostIPC: false
       securityContext:
 {{ toYaml .Values.securityContext | indent 8 }}
       initContainers:
@@ -141,6 +147,15 @@ spec:
         - name: {{ template "mongodb-replicaset.name" . }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: "{{ .Values.image.pullPolicy }}"
+#         securityContext:
+#           privileged: false
+#           readOnlyRootFilesystem: false
+#           allowPrivilegeEscalation: true
+#            runAsNonRoot: false
+#            runAsUser: 0
+#            capabilities:
+#             drop:
+#             - MKNOD
         {{- if .Values.extraVars }}
           env:
 {{ toYaml .Values.extraVars | indent 12 }}

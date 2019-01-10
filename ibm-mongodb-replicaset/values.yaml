@@ -44,8 +44,8 @@ metrics:
     pullPolicy: IfNotPresent
   port: 9216
   path: "/metrics"
-  socketTimeout: 3s
-  syncTimeout: 1m
+  socketTimeout: 3
+  syncTimeout: 1
   prometheusServiceDiscovery: true
   resources: {}
 

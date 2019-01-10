@@ -5,6 +5,9 @@
 * Kubernetes 1.7+ 
 * PV support on the underlying infrastructure.
 
+## PodSecurityPolicy Requirements
+This chart requires a PodSecurityPolicy to be bound to the target namespace prior to installation. Choose predefined ibm-anyuid-psp PodSecurityPolicy.
+
 ## Resources Required
 The chart deploys pods consuming minimum resources as specified in the resources configuration parameter (default: Memory: 200Mi, CPU: 100m)
 
