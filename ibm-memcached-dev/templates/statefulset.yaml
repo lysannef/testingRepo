@@ -10,13 +10,12 @@ metadata:
 spec:
   serviceName: {{ template "memcached.fullname" . }}
   replicas: {{ .Values.replicaCount }}
-  template:
-    metadata:
-      labels:
-        app: {{ template "memcached.fullname" . }}
-        chart: "{{ .Chart.Name }}"
-        release: "{{ .Release.Name }}"
-        heritage: "{{ .Release.Service }}"
+  selector:
+    matchLabels:
+      app: {{ template "memcached.fullname" . }}
+      chart: "{{ .Chart.Name }}"
+      release: "{{ .Release.Name }}"
+      heritage: "{{ .Release.Service }}"
       annotations:
         productName: memcached
         productID: memcached_{{ .Chart.Version }}
