@@ -19,7 +19,7 @@ spec:
       labels:
         app: {{ template "memcached.name" . }}
         release: {{ .Release.Name }}
-        chart: {{ template "memcached.chart" . }}
+        chart: "{{ .Chart.Name }}"
         heritage: {{ .Release.Service }}
       annotations:
         productName: memcached
