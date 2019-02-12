@@ -1,0 +1,102 @@
+{{- if .Values.kubeStateMetrics.enabled -}}
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+{{- if .Values.kubeStateMetrics.deploymentAnnotations }}
+  annotations:
+{{ toYaml .Values.kubeStateMetrics.deploymentAnnotations | indent 4 }}
+{{- end }}
+  labels:
+    app: {{ template "prometheus.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    component: "{{ .Values.kubeStateMetrics.name }}"
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+  name: {{ template "prometheus.kubeStateMetrics.fullname" . }}
+spec:
+  replicas: {{ .Values.kubeStateMetrics.replicaCount }}
+  template:
+    metadata:
+    {{- if .Values.kubeStateMetrics.podAnnotations }}
+      annotations:
+{{ toYaml .Values.kubeStateMetrics.podAnnotations | indent 8 }}
+    {{- end }}
+      labels:
+        app: {{ template "prometheus.name" . }}
+        component: "{{ .Values.kubeStateMetrics.name }}"
+        release: {{ .Release.Name }}
+        chart: {{ .Chart.Name }}
+        heritage: {{ .Release.Service }}
+      annotations:
+        productName: prometheus_kubeStateMetrics
+        productID: prometheus_kubeStateMetrics_{{ .Chart.Version }}
+        productVersion: {{ .Chart.Version }}
+{{- if .Values.kubeStateMetrics.pod.labels }}
+{{ toYaml .Values.kubeStateMetrics.pod.labels | indent 8 }}
+{{- end }}
+    spec:
+      serviceAccountName: {{ template "prometheus.serviceAccountName.kubeStateMetrics" . }}
+{{- if .Values.kubeStateMetrics.priorityClassName }}
+      priorityClassName: "{{ .Values.kubeStateMetrics.priorityClassName }}"
+{{- end }}
+      hostNetwork: false
+      hostPID: false
+      hostIPC: false
+      containers:
+        - name: {{ template "prometheus.name" . }}-{{ .Values.kubeStateMetrics.name }}
+          image: "{{ .Values.kubeStateMetrics.image.repository }}:{{ .Values.kubeStateMetrics.image.tag }}"
+          imagePullPolicy: "{{ .Values.kubeStateMetrics.image.pullPolicy }}"
+          securityContext:
+            privileged: false
+            readOnlyRootFilesystem: false
+            allowPrivilegeEscalation: true
+            runAsNonRoot: false
+            runAsUser: 0
+            capabilities:
+             drop:
+             - MKNOD
+        {{- if .Values.kubeStateMetrics.args }}
+          args:
+          {{- range $key, $value := .Values.kubeStateMetrics.args }}
+            - --{{ $key }}={{ $value }}
+          {{- end }}
+        {{- end }}
+          ports:
+            - name: metrics
+              containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 30
+            timeoutSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 30
+            timeoutSeconds: 30
+          resources:
+{{ toYaml .Values.kubeStateMetrics.resources | indent 12 }}
+    {{- if .Values.kubeStateMetrics.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.kubeStateMetrics.nodeSelector | indent 8 }}
+    {{- end }}
+    {{- if .Values.kubeStateMetrics.securityContext }}
+      securityContext:
+{{ toYaml .Values.kubeStateMetrics.securityContext | indent 8 }}
+    {{- end }}
+    {{- if .Values.kubeStateMetrics.tolerations }}
+      tolerations:
+{{ toYaml .Values.kubeStateMetrics.tolerations | indent 8 }}
+    {{- end }}
+    {{- if .Values.kubeStateMetrics.affinity }}
+      affinity:
+{{ toYaml .Values.kubeStateMetrics.affinity | indent 8 }}
+    {{- end }}
+{{- end }}
+{{- if .Values.node }}
+      affinity:
+        {{- include "nodeaffinity" . | indent 6 }}
+{{- end }}
+

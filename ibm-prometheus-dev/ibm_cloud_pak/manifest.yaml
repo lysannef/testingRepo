@@ -1,0 +1,10 @@
+charts:
+  - archive: file:ibm-prometheus-dev-7.0.0.tgz
+    repository-keys:
+      - image.repository
+
+images:
+- image: ibmcom/prometheus-ppc64le:v2.1.0
+  references:
+  - repository: ibmcom/prometheus-ppc64le
+

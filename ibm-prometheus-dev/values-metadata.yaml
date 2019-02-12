@@ -1,0 +1,1384 @@
+node:
+   __metadata:
+     name: "Node"
+     label: "Node"
+     description: "Node Prefernce"
+     type: "string"
+     immutable: false
+     required: true
+     options:
+     - label: "ppc64le"
+       value: "ppc64le"
+alertmanager:
+  __metadata:
+    name: "alertmanager"
+    label: "Alertmanager"
+    description: "Alertmanager  congiguration"
+  enabled:
+    __metadata:
+      name: "alertmanager.enabled"
+      label: "Enable alertmanager"
+      description: "If true, create alertmanager"
+      type: "boolean"
+      immutable: false
+      required: false
+  name:
+    __metadata:
+      name: "alertmanager.name"
+      label: "Name"
+      description: "alertmanager container name"
+      type: "string"
+      immutable: false
+      required: false    
+  image:
+    repository:
+      __metadata:
+        name: "alertmanager.image.repository"
+        label: "Repository"
+        description: "alertmanager container image repository"
+        type: "string"
+        immutable: false
+        required: true
+    tag:
+      __metadata:
+        name: "alertmanager.image.tag"
+        label: "Tag"
+        description: "alertmanager container image tag"
+        type: "string"
+        immutable: false
+        required: true
+    pullPolicy:
+      __metadata:
+        name: "imagePullPolicy"
+        label: "Docker image pull policy"
+        description: "alertmanager container image pull policy"
+        type: "string"
+        immutable: false
+        required: true
+        options:
+        - label: "Always"
+          value: "Always"
+        - label: "Never"
+          value: "Never"
+        - label: "IfNotPresent"
+          value: "IfNotPresent" 
+  priorityClassName:
+    __metadata:
+      label: "Priority Class Name"
+      description: "alertmanager priorityClassName"
+      type: "string"
+      immutable: false
+      required: false
+  extraArgs:
+    __metadata:
+      name: "extraArgs"
+      label: "Extra Arguments"
+      description: "Additional alertmanager container arguments"
+      type: "string" 
+  prefixURL:
+    __metadata:
+      name: "prefixURL"
+      label: "PrefixURL"
+      description: "The prefix slug at which the server can be accessed"
+      type: "string"
+      immutable: false
+      required: true
+  baseURL:
+    __metadata:
+      name: "baseURL"
+      label: "BaseURL"
+      description: "The external url at which the server can be accessed"
+      type: "string"
+      immutable: false
+      required: true
+  extraEnv:
+    __metadata:
+      name: "extraEnv"
+      label: "ExtraEnv"
+      description: "Extra environment variables"
+      type: "string"
+      immutable: false
+  configMapOverrideName:
+    __metadata:
+      name: "configMapOverrideName"
+      label: "ConfigMapOverrideName"
+      description: "Prometheus alertmanager ConfigMap overrides full-name and sets this value to prevent the default alertmanager ConfigMap from being generated"
+      type: "string"
+      immutable: false
+      required: true
+  ingress:
+    enabled:
+      __metadata:
+        label: "Enable Ingress"
+        description: "If true, alertmanager Ingress will be created."
+        type: "boolean"
+        immutable: false
+        required: false 
+    hosts:
+      __metadata:
+        label: "Ingress hosts"
+        description: "alertmanager Ingress hostnames"
+        type: "string"
+        immutable: false
+        required: false
+    tls:
+      __metadata:
+        label: "Ingress TLS"
+        description: "alertmanager Ingress TLS configuration (YAML)"
+        type: "string"
+        immutable: false
+        required: false
+  persistentVolume:
+    enabled:
+      __metadata:
+        name: "alertmanager.persistentVolume.enabled"
+        label: "Alertmanager Persistent volume"
+        description: "If true, alertmanager will create a Persistent Volume Claim"
+        type: "boolean"
+        immutable: false
+        required: true
+    useDynamicProvisioning:
+      __metadata:
+        name: "alertmanager.persistentVolume.useDynamicProvisioning"
+        label: "Use dynamic provisioning for persistent volume"
+        description: "If dynamic provisioning is available in the cluster this option will automatically provision the requested volume if set to true."
+        type: "boolean"
+        immutable: false
+        required: true
+    existingClaim:
+      __metadata:
+        name: "alertmanager.persistentVolume.existingClaim"
+        label: "Name of existing persistentVolumeClaim"
+        description: "alertmanager data Persistent Volume existing claim name"
+        type: "string"
+        immutable: false
+        required: false
+    size:
+      __metadata:
+        name: "alertmanager.persistentVolume.size"
+        label: "Size for the persistent volume"
+        description: ""
+        type: "string"
+        immutable: false
+        required: false
+    storageClass:
+      __metadata:
+        name: "alertmanager.persistentVolume.storageClass"
+        label: "StorageClass for  persistentVolume"
+        description: "alertmanager data Persistent Volume Storage Class"
+        type: "string"
+        immutable: false
+        required: false
+    accessModes:
+      __metadata:
+        name: "accessMode"
+        label: "storage access mode"
+        description: "alertmanager data Persistent Volume access modes.Use volume as ReadWriteMany, ReadOnlyMany or ReadWriteOnce. Default is ReadWriteOnce."
+        type: "string"
+        immutable: false
+        required: false
+        options:
+        - label: "ReadWriteOnce"
+          value: "ReadWriteOnce"
+        - label: "ReadOnlyMany"
+          value: "ReadOnlyMany"
+        - label: "ReadWriteMany"
+          value: "ReadWriteMany"
+    subPath:
+      __metadata:
+        name: "subpath"
+        label: "SubPath"
+        description: "Subdirectory of alertmanager data Persistent Volume to mount"
+        type: "string"
+        immutable: false
+        required: true
+    mountPath:
+      __metadata:
+        name: "mountpath"
+        label: "MountPath"
+        description: "alertmanager data Persistent Volume mount root path"
+        type: "string"
+        immutable: false
+        required: true
+  replicaCount:
+    __metadata:
+      label: "Replica Count"
+      description: "desired number of alertmanager pods"
+      type: "number"
+      immutable: false
+      required: false
+  schedulerName:
+      __metadata:
+        label: "Scheduler Name"
+        description: "alertmanager alternate scheduler name"
+        type: "string"
+        immutable: false
+        required: false 
+  service:
+    type:
+      __metadata:
+        label: "Alertmanager service type"
+        description: "type of alertmanager service to create"
+        type: "string"
+        immutable: false
+        required: false
+        options:
+          - label: "Cluster IP"
+            value: "ClusterIP"
+          - label: "Node Port"
+            value: "NodePort"
+    loadBalancerIP:
+      __metadata:
+        label: "Service Load Balancer IP"
+        description: "IP address to assign to load balancer (if supported)"
+        type: "string"
+        immutable: false
+        required: false
+    servicePort:
+      __metadata:
+        name: "ServicePort"
+        label: "ServicePort"
+        description: "alertmanager headless service port"
+        type: "string"
+        immutable: true
+        required: true
+    nodePort:
+      __metadata:
+        name: "nodePort"
+        label: "NodePort"
+        description: "alertmanager Nodeport"
+        type: "string"
+        immutable: true
+        required: true
+    loadBalancerSourceRanges:
+      __metadata:
+        name: "loadBalancerSourceRanges"
+        label: "LoadBalancerSourceRanges"
+        description: "list of IP CIDRs allowed access to load balancer (if supported)"
+        type: "string"
+        immutable: true
+        required: true
+    externalIPs:
+      __metadata:
+        name: "service.externalIPs"
+        label: "External IP addresses"
+        description: "List of service external IP addresses."
+        type: "string"
+        immutable: false
+        required: false
+    enableMeshPeer:
+      __metadata:
+        name: "enableMeshPeer"
+        label: "EnableMeshPeer"
+        description: "If true, enable the mesh peer endpoint for the headless service"
+        type: "boolean"
+        immutable: true
+        required: true
+    clusterIP:
+      __metadata:
+        name: "service.clusterIP"
+        label: "Cluster IP"
+        description: "	internal alertmanager cluster service IP"     
+        type: "string"
+        immutable: false
+        required: false
+  tolerations:
+    __metadata:
+      name: "tolerations"
+      label: "Tolerations"
+      description: "node taints to tolerate (requires Kubernetes >=1.6)"
+      type: "string"
+      immutable: false
+      required: false      
+alertmanagerFiles:
+  __metadata:
+    label: "files"
+    description: "Alertmanager Files Needed" 
+  alertmanager:
+    yml:
+      receivers:
+        __metadata:
+          name: "receivers"
+          label: "Receivers"
+          description: "Alertmanagerfiles.alertmanager.yml"
+          type: "string"
+          immutable: true
+          required: true
+      route:
+        groupWait:
+          __metadata:
+            label: "GroupWait"
+            description: "Alertmanagerfiles.route.groupWait"
+            type: "string"   
+            immutable: false
+            required: true
+        groupInterval:
+          __metadata:
+            label: "groupInterval"
+            description: "alertmanagerfiles.route.groupInterval"
+            type: "string"
+            immutable: false
+            required: true
+        receiver:
+          __metadata:
+            label: "receiver"
+            description: "Alertmanagerfiles.route.receiver"
+            type: "string"
+            immutable: false
+            required: true
+        repeatInterval:
+          __metadata:
+            label: "repeatInterval"
+            description: "Alertmanagerfiles.route.repeatInterval"
+            type: "string"
+            immutable: false
+            required: true 
+configmapReload:
+  __metadata:
+    name: "configmapReload"
+    label: "ConfigmapReload"
+    description: "Specify the ConfigMapReload configuration"
+  name:
+    __metadata:
+      label: "Name"
+      description: "specify configmap-reload container name"
+  image:
+    repository:
+      __metadata:
+        name: "configmapReload.image.repository"
+        label: "Repository"
+        description: "configmap-reload container image repository"
+        type: "string"
+        immutable: false
+        required: true
+    tag:
+      __metadata:
+        name: "configmapReload.image.tag"
+        label: "Tag"
+        description: "configmap-reload container image tag"
+        type: "string"
+        immutable: false
+        required: true
+    pullPolicy:
+      __metadata:
+        name: "imagePullPolicy"
+        label: "Docker image pull policy"
+        description: "configmap-reload container image pull policy"
+        type: "string"
+        immutable: false
+        required: true
+        options:
+        - label: "Always"
+          value: "Always"
+        - label: "Never"
+          value: "Never"
+        - label: "IfNotPresent"
+          value: "IfNotPresent" 
+  extraConfigmapMounts:
+    __metadata:
+      name: "extraConfigmapMounts"
+      label: "ExtraConfigmapMounts"
+      description: "Additional configmap-reload configMap mounts"
+initChownData:
+  __metadata:
+    name: "initChownData"
+    label: "InitChownData"
+    description: "Specify the initChownData configuration"
+  name:
+    __metadata:
+      label: "Name"
+      description: "specify initChownData container name"
+  enabled: 
+    __metadata:
+      label: "Enabled"
+      description: "If false, don't reset data ownership at startup"
+      type: "boolean"
+  image:
+    repository:
+      __metadata:
+        name: "configmapReload.image.repository"
+        label: "Repository"
+        description: "init-chown-data container image repository"
+        type: "string"
+        immutable: false
+        required: true
+    tag:
+      __metadata:
+        name: "configmapReload.image.tag"
+        label: "Tag"
+        description: "init-chown-data container image tag"
+        type: "string"
+        immutable: false
+        required: true
+    pullPolicy:
+      __metadata:
+        name: "imagePullPolicy"
+        label: "Docker image pull policy"
+        description: "init-chown-data container image pull policy"
+        type: "string"
+        immutable: false
+        required: true
+        options:
+        - label: "Always"
+          value: "Always"
+        - label: "Never"
+          value: "Never"
+        - label: "IfNotPresent"
+          value: "IfNotPresent"
+kubeStateMetrics:
+  __metadata:
+    name: "kubeStateMetrics"
+    label: "KubeStateMetrics"
+    description: "Specify the kubeStateMetrics configuration"
+  name:
+    __metadata:
+      label: "Name"
+      description: "specify kubeStateMetrics container name"
+  enabled:
+    __metadata:
+      name: "kubeStateMetrics.enabled"
+      label: "kubeStateMetrics enabled"
+      description: "If true, create kube-state-metrics"
+      type: "boolean"
+      immutable: false
+      required: true
+  image:
+    repository:
+      __metadata:
+        name: "kubeStateMetrics.image.repository"
+        label: "Repository"
+        description: "kube-state-metrics container image repository"
+        type: "string"
+        immutable: false
+        required: true
+    tag:
+      __metadata:
+        name: "kubeStateMetrics.image.tag"
+        label: "Tag"
+        description: "kube-state-metrics container image tag"
+        type: "string"
+        immutable: false
+        required: true
+    pullPolicy:
+      __metadata:
+        name: "imagePullPolicy"
+        label: "Docker image pull policy"
+        description: "kube-state-metrics container image pull policy."
+        type: "string"
+        immutable: false
+        required: true
+        options:
+        - label: "Always"
+          value: "Always"
+        - label: "Never"
+          value: "Never"
+        - label: "IfNotPresent"
+          value: "IfNotPresent" 
+  replicaCount:
+    __metadata:
+      name: "replicaCount"
+      label: "Number of replicas"
+      description: "desired number of kube-state-metrics pods."
+      type: "number"
+      immutable: false
+      required: true
+  priorityClassName:
+    __metadata:
+      label: "Priority Class Name"
+      description: "kube-state-metrics priorityClassName"   
+      type: "string"
+      immutable: false
+      required: false
+  deploymentAnnotations:
+    __metadata:
+      label: "DeploymentAnnotations"
+      description: "annotations to be added to kube-state-metrics deployment"
+      type: "string"
+      immutable: false
+      required: false
+  service:
+    annotations:
+      prometheusIoScrape:
+        __metadata:
+          name: "kubeStateMetrics.Service.annotations"
+          label: "service Annotations"
+          description: "annotations for kube-state-metrics service"
+          type: "string"
+          immutable: false
+          required: false
+    type:
+      __metadata:
+        label: "kubeStateMetrics service type"
+        description: "type of kube-state-metrics service to create"
+        type: "string"
+        immutable: false
+        required: false
+        options:
+          - label: "Cluster IP"
+            value: "ClusterIP"
+          - label: "Node Port"
+            value: "NodePort"
+    loadBalancerIP:
+      __metadata:
+        label: "Service Load Balancer IP"
+        description: "IP address to assign to load balancer (if supported)"
+        type: "string"
+        immutable: false
+        required: false
+    servicePort:
+      __metadata:
+        name: "ServicePort"
+        label: "ServicePort"
+        description: "kube-state-metrics service port"
+        type: "string"
+        immutable: true
+        required: true
+    loadBalancerSourceRanges:
+      __metadata:
+        name: "loadBalancerSourceRanges"
+        label: "LoadBalancerSourceRanges"
+        description: "list of IP CIDRs allowed access to load balancer (if supported)"
+        type: "string"
+        immutable: true
+        required: true
+    externalIPs:
+      __metadata:
+        name: "service.externalIPs"
+        label: "External IP addresses"
+        description: "List of service external IP addresses."
+        type: "string"
+        immutable: false
+        required: false
+    clusterIP:
+      __metadata:
+        name: "service.clusterIP"
+        label: "Cluster IP"
+        description: "internal kube-state-metrics cluster service IP."     
+        type: "string"
+        immutable: false
+        required: false
+  tolerations:
+    __metadata:
+      name: "tolerations"
+      label: "Tolerations"
+      description: "node taints to tolerate (requires Kubernetes >=1.6)" 
+      type: "string"
+      immutable: false
+      required: false 
+networkPolicy:
+  __metadata:
+    label: "NetworkPolicy"
+    description: "networkPolicy configuration"
+  enabled:
+    __metadata:
+      label: "networkPolicy"
+      description: "Enable NetworkPolicy. Default value is false"
+      type: "boolean"
+      immutable: false
+      required: false
+
+nodeExporter:
+  __metadata:
+    name: "nodeExporter"
+    label: "NodeExporter"
+    description: "Specify the nodeExporter configuration"
+  name:
+    __metadata:
+      label: "Name"
+      description: "specify nodeExporter container name"
+  enabled:
+    __metadata:
+      name: "nodeExporter.enabled"
+      label: "nodeExporter enabled"
+      description: "If true, create node-exporter"
+      type: "boolean"
+      immutable: false
+      required: true
+  image:
+    repository:
+      __metadata:
+        name: "nodeExporter.image.repository"
+        label: "Repository"
+        description: "node-exporter container image repository"
+        type: "string"
+        immutable: false
+        required: true
+    tag:
+      __metadata:
+        name: "nodeExporter.image.tag"
+        label: "Tag"
+        description: "node-exporter container image tag"
+        type: "string"
+        immutable: false
+        required: true
+    pullPolicy:
+      __metadata:
+        name: "nodeExporter.PullPolicy"
+        label: "Docker image pull policy"
+        description: "node-exporter container image pull policy"
+        type: "string"
+        immutable: false
+        required: true
+        options:
+        - label: "Always"
+          value: "Always"
+        - label: "Never"
+          value: "Never"
+        - label: "IfNotPresent"
+          value: "IfNotPresent" 
+  priorityClassName:
+    __metadata:
+      label: "Priority Class Name"
+      description: "node-exporter priorityClassName"   
+      type: "string"
+      immutable: false
+      required: false
+  service:
+    annotations:
+      prometheusIoScrape:
+        __metadata:
+          name: "nodeExporter.Service.annotations"
+          label: "service Annotations"
+          description: "annotations for nodeExporter service"
+          type: "string"
+          immutable: false
+          required: false
+    type:
+      __metadata:
+        label: "NodeExporter service type"
+        description: "type of node-exporter service to create"
+        type: "string"
+        immutable: false
+        required: false
+        options:
+          - label: "Cluster IP"
+            value: "ClusterIP"
+          - label: "Node Port"
+            value: "NodePort"
+    loadBalancerIP:
+      __metadata:
+        label: "Service Load Balancer IP"
+        description: "IP address to assign to load balancer (if supported)"
+        type: "string"
+        immutable: false
+        required: false
+    servicePort:
+      __metadata:
+        name: "ServicePort"
+        label: "ServicePort"
+        description: "node-exporter service port"
+        type: "string"
+        immutable: true
+        required: true
+    loadBalancerSourceRanges:
+      __metadata:
+        name: "loadBalancerSourceRanges"
+        label: "LoadBalancerSourceRanges"
+        description: "list of IP CIDRs allowed access to load balancer (if supported)"
+        type: "string"
+        immutable: true
+        required: true
+    externalIPs:
+      __metadata:
+        name: "service.externalIPs"
+        label: "External IP addresses"
+        description: "List of service external IP addresses."
+        type: "string"
+        immutable: false
+        required: false
+    clusterIP:
+      __metadata:
+        name: "service.clusterIP"
+        label: "Cluster IP"
+        description: "internal node-exporter cluster service IP"     
+        type: "string"
+        immutable: false
+        required: false
+    hostPort:
+      __metadata:
+        name: "hostPort"
+        label: "HostPort"
+        description: "node-exporter hostPort"
+        type: "string"
+        immutable: true
+        required: true
+  tolerations:
+    __metadata:
+      name: "tolerations"
+      label: "Tolerations"
+      description: "node taints to tolerate (requires Kubernetes >=1.6)" 
+      type: "string"
+      immutable: false 
+      required: false 
+  updateStrategy:
+    type:
+      __metadata:
+        name: "type"
+        label: "Type"
+        description: "updateStrategy.type"
+        type: "string"
+        immutable: false
+        required: false
+  extraArgs:
+    web:
+      routePrefix:
+        __metadata:
+          name: "extraArgs"
+          label: "ExtraArgs"
+          description: "Additional node-exporter container arguments"
+          type: "string"
+          immutable: false
+          required: false
+  extraHostPathMounts:
+    __metadata:
+      name: "extraHostPathMounts"
+      label: "ExtraHostPathMounts"
+      description: "Additional node-exporter hostPath mounts"
+      type: "string"
+      immutable: false
+      required: false
+  extraConfigmapMounts:
+    __metadata:
+      name: "extraConfigmapMounts"
+      label: "ExtraConfigmapMounts"
+      description: "Additional node-exporter ConfigmapMounts mounts"
+      type: "string"
+      immutable: false
+      required: false
+  deploymentAnnotations:
+    __metadata:
+      label: "DeploymentAnnotations"
+      description: "annotations to be added to NodeExporter deployment"
+      type: "string"
+      immutable: false
+      required: false
+pushgateway:
+  __metadata:
+    name: "pushgateway"
+    label: "Pushgateway"
+    description: "Specify the pushgateway configuration"
+  name:
+    __metadata:
+      label: "Name"
+      description: "specify pushgateway container name"
+  enabled:
+    __metadata:
+      name: "pushgateway.enabled"
+      label: "pushgateway enabled"
+      description: "If true, create pushgateway"
+      type: "boolean"
+      immutable: false
+      required: true
+  image:
+    repository:
+      __metadata:
+        name: "pushgateway.image.repository"
+        label: "Repository"
+        description: "pushgateway container image repository"
+        type: "string"
+        immutable: false
+        required: true
+    tag:
+      __metadata:
+        name: "pushgateway.image.tag"
+        label: "Tag"
+        description: "pushgateway container image tag"
+        type: "string"
+        immutable: false
+        required: true
+    pullPolicy:
+      __metadata:
+        name: "imagePullPolicy"
+        label: "Docker image pull policy"
+        description: "pushgateway container image pull policy"
+        type: "string"
+        immutable: false
+        required: true
+        options:
+        - label: "Always"
+          value: "Always"
+        - label: "Never"
+          value: "Never"
+        - label: "IfNotPresent"
+          value: "IfNotPresent" 
+  replicaCount:
+    __metadata:
+      name: "replicaCount"
+      label: "Number of replicas"
+      description: "desired number of pushgateway pods"
+      type: "number"
+      immutable: false
+      required: true
+  priorityClassName:
+    __metadata:
+      label: "Priority Class Name"
+      description: "pushgateway priorityClassName"   
+      type: "string"
+      immutable: false
+      required: false
+  service:
+    annotations:
+      prometheusIoProbe:
+        __metadata:
+          name: "pushgateway.Service.annotations"
+          label: "service Annotations"
+          description: "annotations for pushgateway service"
+          type: "string"
+          immutable: false
+          required: false
+    type:
+      __metadata:
+        label: "pushgateway service type"
+        description: "type of pushgateway service to create"
+        type: "string"
+        immutable: false
+        required: false
+        options:
+          - label: "Cluster IP"
+            value: "ClusterIP"
+          - label: "Node Port"
+            value: "NodePort"
+    loadBalancerIP:
+      __metadata:
+        label: "Service Load Balancer IP"
+        description: "IP address to assign to load balancer (if supported)"
+        type: "string"
+        immutable: false
+        required: false
+    servicePort:
+      __metadata:
+        name: "ServicePort"
+        label: "ServicePort"
+        description: "pushgateway service port"
+        type: "string"
+        immutable: true
+        required: true
+    loadBalancerSourceRanges:
+      __metadata:
+        name: "loadBalancerSourceRanges"
+        label: "LoadBalancerSourceRanges"
+        description: "list of IP CIDRs allowed access to load balancer (if supported)"
+        type: "string"
+        immutable: true
+        required: true
+    externalIPs:
+      __metadata:
+        name: "service.externalIPs"
+        label: "External IP addresses"
+        description: "List of service external IP addresses."
+        type: "string"
+        immutable: false
+        required: false
+    clusterIP:
+      __metadata:
+        name: "service.clusterIP"
+        label: "Cluster IP"
+        description: "internal pushgateway cluster service IP."     
+        type: "string"
+        immutable: false
+        required: false
+  tolerations:
+    __metadata:
+      name: "tolerations"
+      label: "Tolerations"
+      description: "node taints to tolerate (requires Kubernetes >=1.6)" 
+      type: "string"
+      immutable: false
+      required: false 
+  extraArgs:
+    web:
+      routePrefix:
+        __metadata:
+          name: "extraArgs"
+          label: "ExtraArgs"
+          description: "Additional node-exporter container arguments"
+          type: "string"
+          immutable: false
+          required: false
+  ingress:
+    enabled:
+      __metadata:
+        label: "Enable Ingress"
+        description: "If true, pushgateway Ingress will be created"
+        type: "boolean"
+        immutable: false
+        required: false 
+    hosts:
+      __metadata:
+        label: "PushGateway Ingress hosts"
+        description: "pushgateway Ingress hostnames"
+        type: "string"
+        immutable: false
+        required: false
+    tls:
+      __metadata:
+        label: "pushGateway Ingress TLS"
+        description: "pushgateway Ingress TLS configuration (YAML)"
+        type: "string"
+        immutable: false
+        required: false 
+rbac:
+  __metadata:
+    label: "RBAC roles and bindings"
+    description: "RBAC roles contain rules that represent a set of permissions."
+  create:
+    __metadata:
+      name: "create"
+      label: "Create"
+      description: "If true, create & use RBAC resources"
+      type: "boolean"
+      immutable: false
+      required: true
+server:
+  __metadata:
+    name: "Prometheus.server"
+    label: "Prometheus server"
+    description: "Specify the prometheus server configuration"
+  name:
+    __metadata:
+      name: "server.name"
+      label: "Name"
+      description: "Prometheus server container name"
+      type: "string"
+      immutable: false
+      required: false    
+  image:
+    repository:
+      __metadata:
+        name: "server.image.repository"
+        label: "Repository"
+        description: "Prometheus server container image repository"
+        type: "string"
+        immutable: false
+        required: true
+    tag:
+      __metadata:
+        name: "server.image.tag"
+        label: "Tag"
+        description: "Prometheus server container image tag"
+        type: "string"
+        immutable: false
+        required: true
+    pullPolicy:
+      __metadata:
+        name: "imagePullPolicy"
+        label: "Prometheus server pull Policy"
+        description: "Prometheus server container image pull policy."
+        type: "string"
+        immutable: false
+        required: true
+        options:
+        - label: "Always"
+          value: "Always"
+        - label: "Never"
+          value: "Never"
+        - label: "IfNotPresent"
+          value: "IfNotPresent"  
+  prefixURL:
+    __metadata:
+      name: "prefixURL"
+      label: "PrefixURL"
+      description: "The prefix slug at which the server can be accessed"
+      type: "string"
+      immutable: false
+      required: true
+  baseURL:
+    __metadata:
+      name: "baseURL"
+      label: "BaseURL"
+      description: "The external url at which the server can be accessed"
+      type: "string"
+      immutable: false
+      required: true
+  configMapOverrideName:
+    __metadata:
+      name: "configMapOverrideName"
+      label: "ConfigMapOverrideName"
+      description: "Prometheus server ConfigMap override where setting fullname will prevent the default server ConfigMap from being generated"
+      type: "string"
+      immutable: false
+      required: true
+  ingress:
+    enabled:
+      __metadata:
+        label: "Enable Ingress"
+        description: "If true, Prometheus server Ingress will be created"
+        type: "boolean"
+        immutable: false
+        required: false 
+    hosts:
+      __metadata:
+        label: "Ingress hosts"
+        description: "Prometheus server Ingress hostnames"
+        type: "string"
+        immutable: false
+        required: false
+    tls:
+      __metadata:
+        label: "Ingress TLS"
+        description: "Prometheus server Ingress TLS configuration (YAML)"
+        type: "string"
+        immutable: false
+        required: false
+  extraConfigmapMounts:
+    __metadata:
+      name: "extraConfigmapMounts"
+      label: "ExtraConfigmapMounts"
+      description: "Additional Prometheus server configMap mounts"
+  persistentVolume:
+    enabled:
+      __metadata:
+        name: "prometheus.persistentVolume.enabled"
+        label: "Persistent volume"
+        description: "If true, Prometheus server will create a Persistent Volume Claim"
+        type: "boolean"
+        immutable: false
+        required: true
+    useDynamicProvisioning:
+      __metadata:
+        name: "prometheus.persistentVolume.useDynamicProvisioning"
+        label: "Use dynamic provisioning for persistent volume"
+        description: "If dynamic provisioning is available in the cluster this option will automatically provision the requested volume if set to true."
+        type: "boolean"
+        immutable: false
+        required: true
+    existingClaim:
+      __metadata:
+        name: "prometheus.persistentVolume.existingClaim"
+        label: "Name of existing persistentVolumeClaim"
+        description: "	Prometheus server data Persistent Volume existing claim name"
+        type: "string"
+        immutable: false
+        required: false
+    size:
+      __metadata:
+        name: "prometheus.persistentVolume.size"
+        label: "Size for the persistent volume"
+        description: "	Prometheus server data Persistent Volume size"
+        type: "string"
+        immutable: false
+        required: false
+    storageClass:
+      __metadata:
+        name: "prometheus.persistentVolume.storageClass"
+        label: "Name of the storageClass for the persistentVolume"
+        description: "Prometheus server data Persistent Volume Storage Class"
+        type: "string"
+        immutable: false
+        required: false
+    accessModes:
+      __metadata:
+        name: "accessMode"
+        label: "storage access mode"
+        description: "Prometheus server data Persistent Volume access modes"
+        type: "string"
+        immutable: false
+        required: false
+        options:
+        - label: "ReadWriteOnce"
+          value: "ReadWriteOnce"
+        - label: "ReadOnlyMany"
+          value: "ReadOnlyMany"
+        - label: "ReadWriteMany"
+          value: "ReadWriteMany"
+    subPath:
+      __metadata:
+        name: "subpath"
+        label: "SubPath"
+        description: "Subdirectory of Prometheus server data Persistent Volume to mount"
+        type: "string"
+        immutable: false
+        required: true
+    mountPath:
+      __metadata:
+        name: "mountpath"
+        label: "MountPath"
+        description: "Prometheus server data Persistent Volume mount root path"
+        type: "string"
+        immutable: false
+        required: true
+  replicaCount:
+    __metadata:
+      label: "Replica Count"
+      description: "Specify number of desired pods for Prometheus deployment."
+      type: "number"
+      immutable: false
+      required: false
+  schedulerName:
+      __metadata:
+        label: "Scheduler Name"
+        description: "Prometheus server alternate scheduler name"
+        type: "string"
+        immutable: false
+        required: false 
+  priorityClassName:
+    __metadata:
+      label: "Priority Class Name"
+      description: "Prometheus server priorityClassName"
+      type: "string"
+      immutable: false
+      required: false
+  extraHostPathMounts:
+    __metadata:
+      name: "extraHostPathMounts"
+      label: "ExtraHostPathMounts"
+      description: "Additional Prometheus server hostPath mounts"
+      type: "string"
+      immutable: false
+      required: false
+  extraConfigmapMounts:
+    __metadata:
+      name: "extraConfigmapMounts"
+      label: "ExtraConfigmapMounts"
+      description: "Additional Prometheus server  ConfigmapMounts mounts"
+      type: "string"
+      immutable: false
+      required: false
+  deploymentAnnotations:
+    __metadata:
+      label: "DeploymentAnnotations"
+      description: "annotations to be added to prometheus server deployment"
+      type: "string"
+      immutable: false
+      required: false
+  enableAdminApi:
+    __metadata:
+      label: "EnableAdminApi"
+      description: "If true, Prometheus administrative HTTP API will be enabled."
+      type: "boolean"
+      immutable: false
+      required: false
+  extraSecretMounts:
+    __metadata:
+      label: "extraSecretMounts"
+      description: "Additional Prometheus server Secret mounts."
+      type: "string"
+      immutable: false
+      required: false
+  global:
+    evaluationInterval:
+      __metadata:
+        label: "EvaluationInterval"
+        description: "specify the evaluation interval."
+        type: "string"
+        immutable: false
+        required: false
+    scrapeInterval:
+      __metadata:
+        label: "ScrapeInterval"
+        description: "specify the Scrapeinterval."
+        type: "string"
+        immutable: false
+        required: false
+    scrapeTimeout:
+      __metadata:
+        label: "ScrapeTimeout"
+        description: "specify the ScrapeTimeout."
+        type: "string"
+        immutable: false
+        required: false
+  retention:
+    __metadata:
+      name: "prometheus.retention"
+      label: "Retention"
+      description: "(optional) Prometheus data retention"
+      type: "string"
+      immutable: false
+      required: true 
+  service:
+    type:
+      __metadata:
+        label: "Serverservice type"
+        description: "type of Prometheus server service to create"
+        type: "string"
+        immutable: false
+        required: false
+        options:
+          - label: "Cluster IP"
+            value: "ClusterIP"
+          - label: "Node Port"
+            value: "NodePort"
+    loadBalancerIP:
+      __metadata:
+        label: "Service Load Balancer IP"
+        description: "IP address to assign to load balancer (if supported)"
+        type: "string"
+        immutable: false
+        required: false
+    servicePort:
+      __metadata:
+        name: "ServicePort"
+        label: "ServicePort"
+        description: "Prometheus server  service port"
+        type: "string"
+        immutable: true
+        required: true
+    nodePort:
+      __metadata:
+        name: "nodePort"
+        label: "NodePort"
+        description: "Port to be used as the service NodePort (ignored if server.service.type is not NodePort)"
+        type: "string"
+        immutable: true
+        required: true
+    loadBalancerSourceRanges:
+      __metadata:
+        name: "loadBalancerSourceRanges"
+        label: "LoadBalancerSourceRanges"
+        description: "list of IP CIDRs allowed access to load balancer (if supported)"
+        type: "string"
+        immutable: true
+        required: true
+    externalIPs:
+      __metadata:
+        name: "service.externalIPs"
+        label: "External IP addresses"
+        description: "Prometheus server service external IP addresses"
+        type: "string"
+        immutable: false
+        required: false
+    clusterIP:
+      __metadata:
+        name: "service.clusterIP"
+        label: "Cluster IP"
+        description: "internal Prometheus server cluster service IP"     
+        type: "string"
+        immutable: false
+        required: false
+  tolerations:
+    __metadata:
+      name: "tolerations"
+      label: "Tolerations"
+      description: "node taints to tolerate (requires Kubernetes >=1.6)"
+      type: "string"
+      immutable: false
+      required: false
+  terminationGracePeriodSeconds:
+    __metadata:
+      name: "terminationGracePeriodSeconds"
+      label: "TerminationGracePeriodSeconds"
+      description: "Prometheus server Pod termination grace period"
+      type: "string"
+      immutable: false
+      required: false
+  strategy:
+    type:
+      __metadata:
+        name: "strategy.type"
+        label: "Strategy"
+        description: "Specify the server.type.strategy"
+        type: "string"
+        immutable: false
+        required: false
+serverFiles:
+  __metadata:
+        name: "Serverfiles"
+        label: "ServerFiles"
+        description: "Specify the serverFiles configuration"
+  prometheus:
+    yml:
+      ruleFiles:
+        __metadata:
+          label: "ruleFiles"
+          description: "Prometheus server rules configuration"
+          type: "string"
+          immutable: false
+          required: true
+      scrapeConfigs:
+        __metadata:
+          label: "ruleFiles"
+          description: "Prometheus server scrape configuration"
+          type: "string"
+          immutable: false
+          required: true       
+serviceAccounts:
+  __metadata:
+    label: "Service account"
+    description: "A Service Account may be a User, Group or ServiceAccount"
+  alertmanager:
+    create:
+      __metadata:
+        name: "create"
+        label: "Create"
+        description: "Create a Alertmanager.ServiceAccount"
+        type: "boolean"
+        immutable: false
+        required: true
+    name:
+      __metadata:
+        name: "name"
+        label: "Name"
+        description: "Alertmanager.ServiceAccount name"
+        type: "string"
+        immutable: false
+        required: false
+  server:
+    create:
+      __metadata:
+        name: "create"
+        label: "Create"
+        description: "Create a server.ServiceAccount"
+        type: "boolean"
+        immutable: false
+        required: true
+    name:
+      __metadata:
+        name: "name"
+        label: "Name"
+        description: "server.ServiceAccount name"
+        type: "string"
+        immutable: false
+        required: false
+  kubeStateMetrics:
+    create:
+      __metadata:
+        name: "create"
+        label: "Create"
+        description: "Create a kubeStateMetrics.ServiceAccount"
+        type: "boolean"
+        immutable: false
+        required: true
+    name:
+      __metadata:
+        name: "name"
+        label: "Name"
+        description: "kubeStateMetrics.ServiceAccount name"
+        type: "string"
+        immutable: false
+        required: false
+  nodeExporter:
+    create:
+      __metadata:
+        name: "create"
+        label: "Create"
+        description: "Create a nodeExporter.ServiceAccount"
+        type: "boolean"
+        immutable: false
+        required: true
+    name:
+      __metadata:
+        name: "name"
+        label: "Name"
+        description: "nodeExporter.ServiceAccount name"
+        type: "string"
+        immutable: false
+        required: false
+  pushgateway:
+    create:
+      __metadata:
+        name: "create"
+        label: "Create"
+        description: "Create a pushgateway.ServiceAccount"
+        type: "boolean"
+        immutable: false
+        required: true
+    name:
+      __metadata:
+        name: "name"
+        label: "Name"
+        description: "pushgateway.ServiceAccount name"
+        type: "string"
+        immutable: false
+        required: false
+
+
