@@ -1,0 +1,6 @@
+dependencies:
+- name: ibm-mariadb-dev
+  repository: https://raw.githubusercontent.com/IBM/charts/master/repo/stable/
+  version: 1.1.2
+digest: sha256:1fa68d41e501e730d6720c0462d0b2ea5571e205b1c0b774f3f567455fcc1f0d
+generated: 2019-01-29T17:50:42.943378352+05:30
