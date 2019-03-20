@@ -15,7 +15,7 @@ $ helm install community/ibm-jetty
 The chart deploys pods consuming minimum resources as specified in the resources configuration parameter (default: Memory: 200Mi, CPU: 100m)
 
 ## PodSecurityPolicy Requirements
-This chart requires a PodSecurityPolicy to be bound to the target namespace prior to installation. Choose predefined ibm-restricted-psp PodSecurityPolicy.
+This chart requires a PodSecurityPolicy to be bound to the target namespace prior to installation. Choose predefined ibm-anyuid PodSecurityPolicy.
 
 ## Introduction
 
@@ -67,7 +67,7 @@ The following table lists the configurable parameters of the Jetty chart and the
 | `ingress.annotations`     | Jetty  Ingress annotations  | {}                                                      |
 | `ingress.path`            | Jetty Ingress Path         | /                                                       |
 | `ingress.hosts`           | Jetty Ingress hostnames    | []                                                      |
-| `ingress.tls              | Jetty Ingress TLS configuration (YAML)| []                                           |
+| `ingress.tls`              | Jetty Ingress TLS configuration (YAML)| []                                           |
 | `Tolerations`             | Tolerations that are applied to pods for all the services | []                        |
 
 The above parameters map to `ibm-jetty` params.
